@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 export const Auth = () => {
   const navigate = useNavigate();
 
-  const { data, mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationKey: ["login"],
     mutationFn: mutationLogin,
   });
 
   const handleLogin = async () => {
-    await mutate();
+    const data = await mutateAsync();
     localStorage.setItem("guest_session_id", data.guest_session_id);
     navigate("/");
   };
